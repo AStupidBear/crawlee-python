@@ -89,7 +89,8 @@ class PlaywrightBrowserController(BaseBrowserController):
         if not self.has_free_capacity:
             raise ValueError('Cannot open more pages in this browser.')
 
-        page = await self._browser.new_page(**page_options)
+        # page = await self._browser.new_page(**page_options)
+        page = await self._browser.contexts[0].new_page(**page_options)
 
         # Handle page close event
         page.on(event='close', f=self._on_page_close)

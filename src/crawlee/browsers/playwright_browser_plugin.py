@@ -93,7 +93,8 @@ class PlaywrightBrowserPlugin(BaseBrowserPlugin):
             raise RuntimeError('Playwright browser plugin is not initialized.')
 
         if self._browser_type == 'chromium':
-            browser = await self._playwright.chromium.launch(**self._browser_options)
+            # browser = await self._playwright.chromium.launch(**self._browser_options)
+            browser = await self._playwright.chromium.connect_over_cdp('http://127.0.0.1:9222')
         elif self._browser_type == 'firefox':
             browser = await self._playwright.firefox.launch(**self._browser_options)
         elif self._browser_type == 'webkit':
